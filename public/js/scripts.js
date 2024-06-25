@@ -73,7 +73,8 @@ function uploadFiles(files) {
 
   const xhr = new XMLHttpRequest();
 
-  xhr.open("POST", "http://localhost:3000/upload", true); // Cambiar la URL si es necesario
+  xhr.open("POST", "http://localhost:80/upload", true);
+  // Cambiar la URL si es necesario
 
   xhr.onload = function () {
     if (xhr.status === 200) {
