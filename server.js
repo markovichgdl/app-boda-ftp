@@ -2,36 +2,76 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const fs = require("fs");
-const basicAuth = require("basic-auth");
+const multer = require("multer");
 const ftp = require("basic-ftp");
 
 // Middleware para permitir parsear FormData
-const multer = require("multer");
-const upload = multer({ dest: "uploads/" }); // Directorio temporal para almacenar archivos subidos
+const upload = multer({ dest: "uploads/htdocs/" }); // Directorio temporal para almacenar archivos subidos
 
-// Middleware para servir archivos estáticos desde la carpeta public
-app.use(express.static(path.join(__dirname, "public")));
+// Función para generar un nombre aleatorio de archivo
+function generateRandomFilename() {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let randomFilename = "";
+  for (let i = 0; i < 9; i++) {
+    randomFilename += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return randomFilename;
+}
 
 // Ruta para manejar la subida de archivos
 app.post("/upload", upload.array("files"), async (req, res) => {
   try {
     // Implementar lógica de subida a FTP aquí
-    const credentials = { host: "192.168.1.41", user: "app", password: "123" };
+    const credentials = {
+      host: "ftpupload.net",
+      user: "if0_36783695",
+      password: "4g00byvCET",
+    };
     const client = new ftp.Client();
     await client.access(credentials);
 
     const files = req.files;
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-      await client.uploadFrom(file.path, "/" + file.originalname);
+      const randomFilename = generateRandomFilename();
+      const remotePath = `/htdocs/${randomFilename}${path.extname(
+        file.originalname
+      )}`;
+      await client.uploadFrom(file.path, remotePath);
+      console.log(`Archivo ${file.originalname} subido como ${randomFilename}`);
     }
 
+    // Cerrar conexión FTP
     await client.close();
+
+    // Eliminar archivos temporales después de subir al FTP
+    files.forEach((file) => {
+      fs.unlink(file.path, (err) => {
+        if (err) {
+          console.error(
+            `Error al eliminar archivo temporal ${file.path}:`,
+            err
+          );
+        } else {
+          console.log(`Archivo temporal ${file.path} eliminado correctamente.`);
+        }
+      });
+    });
+
     res.status(200).send("Archivos subidos con éxito.");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error al subir archivos.");
   }
+});
+
+// Middleware para servir archivos estáticos desde la carpeta public
+app.use(express.static(path.join(__dirname, "public")));
+
+// Ruta para manejar la solicitud GET a la raíz
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 // Iniciar el servidor
