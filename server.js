@@ -6,7 +6,9 @@ const multer = require("multer");
 const ftp = require("basic-ftp");
 
 // Middleware para permitir parsear FormData
-const upload = multer({ dest: "uploads/htdocs/" }); // Directorio temporal para almacenar archivos subidos
+const upload = multer({
+  dest: "uploads/htdocs/",
+});
 
 // Función para generar un nombre aleatorio de archivo
 function generateRandomFilename() {
@@ -32,21 +34,15 @@ app.post("/upload", upload.array("files"), async (req, res) => {
     await client.access(credentials);
 
     const files = req.files;
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
+    const uploadPromises = files.map(async (file) => {
       const randomFilename = generateRandomFilename();
       const remotePath = `/htdocs/${randomFilename}${path.extname(
         file.originalname
       )}`;
       await client.uploadFrom(file.path, remotePath);
       console.log(`Archivo ${file.originalname} subido como ${randomFilename}`);
-    }
 
-    // Cerrar conexión FTP
-    await client.close();
-
-    // Eliminar archivos temporales después de subir al FTP
-    files.forEach((file) => {
+      // Eliminar archivo temporal
       fs.unlink(file.path, (err) => {
         if (err) {
           console.error(
@@ -59,6 +55,13 @@ app.post("/upload", upload.array("files"), async (req, res) => {
       });
     });
 
+    // Esperar a que todas las subidas de archivos terminen
+    await Promise.all(uploadPromises);
+
+    // Cerrar conexión FTP
+    await client.close();
+
+    // Enviar respuesta al cliente
     res.status(200).send("Archivos subidos con éxito.");
   } catch (err) {
     console.error(err);
@@ -74,8 +77,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// Iniciar el servidor
+// Configuración para que el servidor escuche en todas las interfaces de red disponibles
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
+const HOST = "0.0.0.0";
+
+app.listen(PORT, HOST, () => {
+  console.log(`Servidor escuchando en http://${HOST}:${PORT}`);
 });
