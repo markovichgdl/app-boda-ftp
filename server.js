@@ -78,7 +78,7 @@ app.get("/", (req, res) => {
 });
 
 // Configuración para que el servidor escuche en todas las interfaces de red disponibles
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 const HOST = "0.0.0.0";
 
 app.listen(PORT, HOST, () => {
