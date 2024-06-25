@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- inicio de favicon  -->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- fin de favicon  -->
+
+    <title>Paola & Alejandro</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Playwrite+DE+LA:wght@100..400&display=swap"
+        rel="stylesheet">
+
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+</head>
+
+<body>
+    <div id="loader" class="loader-container">
+        <div class="loader"></div>
+        <p class="loader-text"></p>
+    </div>
+
+    <main class="container">
+        <img src="img/paola-alejandro.svg" alt="Imagen de Paola y Alejrandro" class="nombres-img">
+        <h1>Comparte tus Memorias</h1>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" id="files" name="files" multiple accept="image/*,video/*" style="display: none;" />
+            <label for="files" id="customFileButton" class="custom-file-button">
+                <i class="fas fa-cloud-upload-alt custom-icon"></i> Seleccionar Fotos y Videos
+            </label>
+            <span id="fileCount" class="file-count"></span>
+        </form>
+
+
+        <div id="progress"></div>
+        <div id="progressBar"></div>
+        <!-- Agregar imagen -->
+        <img src="img/logo-lime-memories.svg" alt="Logo Lime Memories" class="logo-img">
+    </main>
+
+    <footer>
+        <p class="footertex">Derechos Reservados Lima Design ©2024 app v1.0.0</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/scriptloading.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/scriptbackground.js"></script>
+</body>
+
+</html>

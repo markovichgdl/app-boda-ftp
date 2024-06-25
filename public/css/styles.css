@@ -1,0 +1,171 @@
+/* Estilos generales */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background-color: #1c1c1c;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+}
+
+/* Contenedor principal */
+.container {
+  margin: 10px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  max-width: 500px;
+  width: 100%;
+  color: #ffffff;
+  position: relative; /* Necesario para posicionar la imagen dentro */
+}
+
+/* Estilo para la imagen del logo */
+.logo-img {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; /* Ajuste para la esquina izquierda */
+  width: 40px; /* Medida solicitada */
+  height: auto; /* Para mantener la proporción */
+  z-index: 10; /* Asegura que esté sobre otros elementos */
+}
+
+/* Loader */
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Gris claro */
+  border-top: 16px solid #333; /* Gris oscuro */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+.loader-text {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*img de nombres*/
+.nombres-img {
+  width: 60%;
+}
+/* Título */
+h1 {
+  font-family: Comfortaa;
+  font-size: 1.3em;
+  margin-top: 120px;
+  color: #ffffff;
+}
+
+.custom-file-button {
+  margin-top: 7px;
+  display: inline-flex; /* Usamos flexbox para centrar verticalmente */
+  align-items: center; /* Centramos verticalmente el contenido */
+  justify-content: center; /* Centramos horizontalmente el contenido */
+  padding: 15px 20px;
+  border-radius: 50px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  font-size: 1em;
+  /*font-weight: bold;*/
+  transition: background-color 0.3s, box-shadow 0.3s;
+  animation: pulsate 1.9s infinite;
+  opacity: 0.9; /* transparencia */
+  text-align: center; /* Centramos el texto */
+}
+
+.custom-file-button i {
+  margin-right: 10px; /* Espacio entre el icono y el texto */
+}
+
+.custom-file-button:hover {
+  color: #ffffff;
+  background-color: #484848;
+  box-shadow: 0 0 15px rgba(210, 210, 210, 0.5);
+}
+
+@keyframes pulsate {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Icono de nube  personalizado */
+.custom-icon {
+  font-size: 1.4em; /* Ajusta el tamaño según tus necesidades */
+  margin-right: 10px; /* Espacio entre el ícono y el texto */
+}
+
+/* Barra de progreso */
+#progress {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 200;
+  margin-top: 20px;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+#progressBar {
+  width: 0;
+  height: 30px;
+  background-color: #d5d5d5;
+  text-align: center;
+  line-height: 30px;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 5px 0;
+  background: rgba(0, 0, 0, 0.3); /* Usar rgba para la opacidad del fondo */
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+}
+
+.footertex {
+  color: #ffffff;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 0.8em;
+}
